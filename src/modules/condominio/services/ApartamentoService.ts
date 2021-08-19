@@ -38,8 +38,21 @@ class ApartamentoService {
 
   public async findById({idApartamento}: IRequest): Promise<Apartamento | undefined>{
     const apartamentoRepositorio = getCustomRepository(ApartamentoRepositorio);
-    const apartamento = await apartamentoRepositorio.findOne(idApartamento);
-    return apartamento;
+    const apartamentoExiste = await apartamentoRepositorio.findOne(idApartamento);
+    if(!apartamentoExiste){
+      throw new AppError('Error Apartamento não encontrado', 404);
+    }
+    return apartamentoExiste;
+
+  }
+
+  public async delete({idApartamento}: IRequest): Promise<void>{
+    const apartamentoRepositorio = getCustomRepository(ApartamentoRepositorio);
+    const apartamentoExiste = await apartamentoRepositorio.findOne(idApartamento);
+    if(!apartamentoExiste){
+      throw new AppError('Error Apartamento não encontrado', 404);
+    }
+    apartamentoRepositorio.delete(idApartamento)
 
   }
 
@@ -52,6 +65,7 @@ class ApartamentoService {
     apartamentoRepositorio.save(apartamentoExiste);
     return apartamentoExiste;
   }
+
 }
 
 export default new ApartamentoService();

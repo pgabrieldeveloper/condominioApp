@@ -12,12 +12,10 @@ class ApartamentoControlador {
         const apartamento = await ApartamentoService.create({nrBloco,nrNumeroApartamento});
         return res.status(201).json(apartamento);
     }
-
     public async pegarTodos(req: Request, res: Response): Promise<Response> {
         const apartamentos = await ApartamentoService.getAll()
         return res.status(200).json(apartamentos);
     }
-
     public async update(req: Request, res: Response): Promise<Response> {
         const {
             idApartamento,
@@ -31,6 +29,11 @@ class ApartamentoControlador {
     public async findById(req: Request, res: Response): Promise<Response> {
         const {idApartamento} = req.params;
         return res.status(200).json(await ApartamentoService.findById({idApartamento:parseInt(idApartamento)}))
+    }
+    public async delete(req: Request, res: Response): Promise<Response> {
+        const {idApartamento} = req.params;
+        await ApartamentoService.delete({idApartamento:parseInt(idApartamento)});
+        return res.status(204).json();
     }
 }
 
