@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import apartamentoRotas from '../../../modules/condominio/rotas/ApartamentoRotas';
 
 const routes = Router();

@@ -1,7 +1,5 @@
-import { EntityRepository, getRepository, Repository } from 'typeorm';
-import { Query } from 'typeorm/driver/Query';
+import { EntityRepository,  Repository } from 'typeorm';
 import Apartamento from '../entidade/Apartamento';
-import {getConnection} from "typeorm";
 
 
 @EntityRepository(Apartamento)
