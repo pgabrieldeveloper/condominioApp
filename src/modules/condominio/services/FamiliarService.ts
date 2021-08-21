@@ -1,0 +1,77 @@
+import AppError from '../../../shared/errors/AppError';
+import { getCustomRepository } from 'typeorm';
+import Morador from '../typeorm/entidade/Morador';
+import MoradorRepositorio from '../typeorm/repositorio/MoradorRepositorio';
+import FamiliaresRepositorio from '../typeorm/repositorio/FamiliaresRepositorio';
+import Familiares from '../typeorm/entidade/Familiares';
+
+interface IFamiliar { 
+    idFamiliar?: number;
+    dsNome?: string;
+    dsCpf: string;
+    cdApartamento?: number;
+    dsContato?: string;
+    dsEmail?: string;
+    cdMorador?: number;
+}
+
+interface IRequest {
+    idFamiliar: number;
+}
+
+class FamiliarService {
+  public async create({
+    dsNome,
+    dsCpf,
+    cdApartamento,
+    dsContato,
+    dsEmail
+    
+  }: IFamiliar): Promise<Familiares | undefined> {
+    const repositorio = getCustomRepository(FamiliaresRepositorio);
+    
+    const familiarExistes = await repositorio.procurarPorCpf(dsCpf);  
+    if(familiarExistes) {
+            throw new AppError('Familiar Ja cadastrato', 401);
+    }
+    const  morador = repositorio.create({dsCpf,cdApartamento,dsNome,dsEmail,dsContato});
+    await repositorio.save(morador);
+    return morador;
+  }
+
+  public async Todosfamiliares({idFamiliar}:IFamiliar): Promise<Familiares[]| undefined>{
+    const repositorio = getCustomRepository(FamiliaresRepositorio);
+    if(!idFamiliar){
+        throw new AppError("Campo IdFamiliar é obrigatorio");
+    }
+    const familiares = await repositorio.procurarFamiliares(idFamiliar);
+    return familiares;
+  }
+
+  public async findById({idFamiliar}: IFamiliar): Promise<Morador>{
+    const repositorio = getCustomRepository(MoradorRepositorio);
+    const moradorExistes = await repositorio.findOne(idFamiliar);
+    if(!moradorExistes){
+      throw new AppError('Error Familiar não encontrado', 404);
+    }
+    return moradorExistes;
+  }
+
+
+
+  public async delete({idFamiliar}: IFamiliar): Promise<void>{
+    const repositorio = getCustomRepository(FamiliaresRepositorio);
+    const familiarExistes = await repositorio.findOne(idFamiliar);
+    if(!familiarExistes){
+      throw new AppError('Error Morador não encontrado', 404);
+    }
+    if(!idFamiliar){
+        throw new AppError('Campo id é obrigatorio', 401);
+    }
+    await repositorio.delete(idFamiliar)
+
+  }  
+
+}
+
+export default new FamiliarService();

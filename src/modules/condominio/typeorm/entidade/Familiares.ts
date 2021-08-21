@@ -14,7 +14,7 @@ class Familiares {
     dsCpf: string;
 
     @Column({name:"cd_apartamento"})
-    cdApartamento: string;
+    cdApartamento: number;
 
     @Column({name:"ds_contato"})
     dsContato: string;
