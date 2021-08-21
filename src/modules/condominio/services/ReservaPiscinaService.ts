@@ -13,7 +13,7 @@ interface IRequest {
     idReservaPiscina: number;
 }
 
-class ApartamentoService {
+class ReservaPiscinaService {
   public async create({
     dtReserva,
     cdMorador
@@ -42,7 +42,7 @@ class ApartamentoService {
     return reservaPiscinaDay;
   }
 
-  public async findById({idReservaPiscina}: IReservaPiscina): Promise<ReservaPiscina | undefined>{
+  public async findById({idReservaPiscina}: IRequest): Promise<ReservaPiscina | undefined>{
     const repositorio = getCustomRepository(ReservaPiscinaRepositorio);
     const reservaPiscinaExiste = await repositorio.findOne(idReservaPiscina);
     if(!reservaPiscinaExiste){
@@ -63,4 +63,4 @@ class ApartamentoService {
 
 }
 
-export default new ApartamentoService();
+export default new ReservaPiscinaService();

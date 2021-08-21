@@ -1,6 +1,5 @@
 import {Request, Response} from 'express'
 import FamiliarService from '../services/FamiliarService';
-import MoradorService from "../services/MoradorService";
 
 class Moradorcontrolador {
 
