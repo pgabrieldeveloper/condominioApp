@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import familiarRotas from 'src/modules/condominio/rotas/familiarRotas';
+import moradorRotas from 'src/modules/condominio/rotas/moradorRotas';
+import reservaPiscinaRotas from 'src/modules/condominio/rotas/reservaPiscinaRotas';
 
 import apartamentoRotas from '../../../modules/condominio/rotas/ApartamentoRotas';
 
@@ -8,5 +11,9 @@ routes.get('/', (req, res) => {
 });
 
 routes.use('/apartamento', apartamentoRotas);
+routes.use('/morador', moradorRotas);
+routes.use('/familiares', familiarRotas);
+routes.use('/reservaPiscina', reservaPiscinaRotas);
+
 
 export default routes;
