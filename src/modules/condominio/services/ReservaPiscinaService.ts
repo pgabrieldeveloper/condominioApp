@@ -1,7 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Apartamento from '../typeorm/entidade/Apartamento';
-import ApartamentoRepositorio from '../typeorm/repositorio/ApartementoRepositorio';
 import ReservaPiscinaRepositorio from '../typeorm/repositorio/ReservaPiscinaRepositorio';
 import ReservaPiscina from '../typeorm/entidade/ReservaPiscina';
 
