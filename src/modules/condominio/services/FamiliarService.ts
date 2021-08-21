@@ -17,6 +17,10 @@ interface IRequest {
     idFamiliar: number;
 }
 
+interface IRequestMorador {
+  cdMorador: number;
+}
+
 class FamiliarService {
   public async create({
     dsNome,
@@ -37,16 +41,16 @@ class FamiliarService {
     return familiares;
   }
 
-  public async Todosfamiliares({idFamiliar}:IFamiliar): Promise<Familiares[]| undefined>{
+  public async Todosfamiliares({cdMorador}:IRequestMorador): Promise<Familiares[]| undefined>{
     const repositorio = getCustomRepository(FamiliaresRepositorio);
-    if(!idFamiliar){
+    if(!cdMorador){
         throw new AppError("Campo IdFamiliar é obrigatorio");
     }
-    const familiares = await repositorio.procurarFamiliares(idFamiliar);
+    const familiares = await repositorio.procurarFamiliares(cdMorador);
     return familiares;
   }
 
-  public async findById({idFamiliar}: IFamiliar): Promise<Familiares>{
+  public async findById({idFamiliar}: IRequest): Promise<Familiares>{
     const repositorio = getCustomRepository(FamiliaresRepositorio);
     const familiarExistes = await repositorio.findOne(idFamiliar);
     if(!familiarExistes){
@@ -57,7 +61,7 @@ class FamiliarService {
 
 
 
-  public async delete({idFamiliar}: IFamiliar): Promise<void>{
+  public async delete({idFamiliar}: IRequest): Promise<void>{
     const repositorio = getCustomRepository(FamiliaresRepositorio);
     const familiarExistes = await repositorio.findOne(idFamiliar);
     if(!familiarExistes){
