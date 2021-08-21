@@ -11,8 +11,7 @@ class ReservaPiscina {
     dtReserva: Date;
 
     @Column({name:'cd_morador'})
-    cdMorador: number;
-
+    cdMorador: number; 
 }
 
 export default ReservaPiscina;
