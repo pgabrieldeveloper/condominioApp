@@ -16,7 +16,7 @@ interface IRequest {
     idMorador: number;
 }
 
-class ApartamentoService {
+class MoradorService {
   public async create({
     dsNomeMorador,
     dsCpf,
@@ -42,7 +42,7 @@ class ApartamentoService {
     return moradores;
   }
 
-  public async findById({idMorador}: IMorador): Promise<Morador>{
+  public async findById({idMorador}: IRequest): Promise<Morador>{
     const repositorio = getCustomRepository(MoradorRepositorio);
     const moradorExistes = await repositorio.findOne(idMorador);
     if(!moradorExistes){
@@ -53,7 +53,7 @@ class ApartamentoService {
 
 
 
-  public async delete({idMorador}: IMorador): Promise<void>{
+  public async delete({idMorador}: IRequest): Promise<void>{
     const repositorio = getCustomRepository(MoradorRepositorio);
     const moradorExists = await repositorio.findOne(idMorador);
     if(!moradorExists){
@@ -68,4 +68,4 @@ class ApartamentoService {
 
 }
 
-export default new ApartamentoService();
+export default new MoradorService();

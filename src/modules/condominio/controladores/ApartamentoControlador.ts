@@ -1,7 +1,7 @@
 import ApartamentoService from "../services/ApartamentoService";
 import {Request, Response} from 'express'
 
-class ApartamentoControlador {
+class MoradorControlador {
 
     public async create(req: Request, res: Response): Promise<Response> {
         const {
@@ -37,4 +37,4 @@ class ApartamentoControlador {
     }
 }
 
-export default new ApartamentoControlador();
+export default new MoradorControlador();

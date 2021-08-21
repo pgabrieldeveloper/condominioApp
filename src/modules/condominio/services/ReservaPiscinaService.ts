@@ -51,8 +51,6 @@ class ApartamentoService {
     return reservaPiscinaExiste;
   }
 
-
-
   public async delete({idReservaPiscina}: IRequest): Promise<void>{
     const repositorio = getCustomRepository(ReservaPiscinaRepositorio);
     const reservaPiscinaExiste = await repositorio.findOne(idReservaPiscina);

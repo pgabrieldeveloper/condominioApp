@@ -1,7 +1,5 @@
 import AppError from '../../../shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Morador from '../typeorm/entidade/Morador';
-import MoradorRepositorio from '../typeorm/repositorio/MoradorRepositorio';
 import FamiliaresRepositorio from '../typeorm/repositorio/FamiliaresRepositorio';
 import Familiares from '../typeorm/entidade/Familiares';
 
@@ -34,9 +32,9 @@ class FamiliarService {
     if(familiarExistes) {
             throw new AppError('Familiar Ja cadastrato', 401);
     }
-    const  morador = repositorio.create({dsCpf,cdApartamento,dsNome,dsEmail,dsContato});
-    await repositorio.save(morador);
-    return morador;
+    const  familiares = repositorio.create({dsCpf,cdApartamento,dsNome,dsEmail,dsContato});
+    await repositorio.save(familiares);
+    return familiares;
   }
 
   public async Todosfamiliares({idFamiliar}:IFamiliar): Promise<Familiares[]| undefined>{
@@ -48,13 +46,13 @@ class FamiliarService {
     return familiares;
   }
 
-  public async findById({idFamiliar}: IFamiliar): Promise<Morador>{
-    const repositorio = getCustomRepository(MoradorRepositorio);
-    const moradorExistes = await repositorio.findOne(idFamiliar);
-    if(!moradorExistes){
+  public async findById({idFamiliar}: IFamiliar): Promise<Familiares>{
+    const repositorio = getCustomRepository(FamiliaresRepositorio);
+    const familiarExistes = await repositorio.findOne(idFamiliar);
+    if(!familiarExistes){
       throw new AppError('Error Familiar não encontrado', 404);
     }
-    return moradorExistes;
+    return familiarExistes;
   }
 
 
