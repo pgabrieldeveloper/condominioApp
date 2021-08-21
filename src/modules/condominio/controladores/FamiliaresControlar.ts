@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import FamiliarService from '../services/FamiliarService';
 
-class Moradorcontrolador {
+class FamilarControlador {
 
     public async create(req: Request, res: Response): Promise<Response> {
         const {
@@ -42,4 +42,4 @@ class Moradorcontrolador {
     }
 }
 
-export default new Moradorcontrolador();
+export default new FamilarControlador();
