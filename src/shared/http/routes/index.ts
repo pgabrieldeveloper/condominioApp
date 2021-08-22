@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import familiarRotas from 'src/modules/condominio/rotas/familiarRotas';
-import moradorRotas from 'src/modules/condominio/rotas/moradorRotas';
-import reservaPiscinaRotas from 'src/modules/condominio/rotas/reservaPiscinaRotas';
+import familiarRotas from '../../../modules/condominio/rotas/familiarRotas';
+import moradorRotas from '../../../modules/condominio/rotas/moradorRotas';
+import reservaPiscinaRotas from '../../../modules/condominio/rotas/reservaPiscinaRotas';
 
 import apartamentoRotas from '../../../modules/condominio/rotas/ApartamentoRotas';
 

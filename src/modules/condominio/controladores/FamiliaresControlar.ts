@@ -7,9 +7,10 @@ class FamilarControlador {
         const {
             dsNome,
             dsCpf,
-            cdApartamento,
+            cdMorador,
             dsContato,
-            dsEmail
+            dsEmail,
+            nrIdade
         
         } = req.body;
         
@@ -17,9 +18,9 @@ class FamilarControlador {
             {
                 dsNome,
                 dsCpf,
-                cdApartamento,
+                cdMorador,
                 dsContato,
-                dsEmail
+                dsEmail,nrIdade
             }
         );
         return res.status(201).json(familiar);

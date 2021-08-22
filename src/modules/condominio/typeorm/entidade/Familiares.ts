@@ -13,17 +13,11 @@ class Familiares {
     @Column({name:'ds_cpf'})
     dsCpf: string;
 
-    @Column({name:"cd_apartamento"})
-    cdApartamento: number;
-
     @Column({name:"ds_contato"})
     dsContato: string;
 
     @Column({name:"ds_email"})
     dsEmail: string;
-
-    @Column({name:"nrIdade"})
-    nrIdade: number
 
     @Column({name:"cd_morador"})
     cdMorador: number;

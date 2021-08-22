@@ -1,4 +1,5 @@
 import { EntityRepository,  Repository } from 'typeorm';
+import reservaPiscinaRotas from '../../rotas/reservaPiscinaRotas';
 import Morador from '../entidade/Morador';
 import ReservaPiscina from '../entidade/ReservaPiscina';
 
@@ -15,27 +16,26 @@ class ReservaPiscinaRepositorio extends Repository<ReservaPiscina> {
     return ReservaPiscina;
   }
 
-  public async reservaPiscinaCountTen(dataReserva: Date): Promise<ReservaPiscina[] | undefined> {
-    const reservaPiscina = await this.createQueryBuilder()
-    .select('reservaPiscina')
-    .from(ReservaPiscina, 'reservaPiscina')
-    .where('reservaPiscina.dtReserva = :dataReserva', {dataReserva})
-    .getMany();
+  public async reservaPiscinaDataHora(dataReserva: Date, horaReserva:String): Promise<ReservaPiscina[] | undefined> {
+    const reservaPiscina = await this.query("SELECT * FROM condominio.tb_reserva_piscina rp "
+    + " WHERE rp.dt_reserva = $1 AND rp.hr_reserva = $2 ", [dataReserva,horaReserva]);
     return reservaPiscina;
   }
+
+  public async getAllDay(dataReserva: Date): Promise<ReservaPiscina[] | undefined> {
+    const reservaPiscina = await this.query("SELECT * FROM condominio.tb_reserva_piscina rp "
+    + " WHERE rp.dt_reserva = $1", [dataReserva]);
+    return reservaPiscina;  }
 
 }
 
 /*
 
-import {getConnection} from "typeorm";
-
-  const user = await getConnection()
-      .createQueryBuilder()
-      .select("user")
-      .from(User, "user")
-      .where("user.id = :id", { id: 1 })
-      .getOne();
+  public async reservaPiscinaCountTen(dataReserva: Date, horaReserva:String): Promise<ReservaPiscina[] | undefined> {
+    const reservaPiscina = await this.query("SELECT * FROM condominio.tb_reserva_piscina rp "
+    + " WHERE rp.dt_reserva = $1 AND rp.hr_reserva = $2 ", [dataReserva,horaReserva]);
+    return reservaPiscina;
+  }
 
 */
 

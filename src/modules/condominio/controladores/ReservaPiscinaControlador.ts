@@ -7,14 +7,16 @@ class ReservaPiscinaControlador {
     public async create(req: Request, res: Response): Promise<Response> {
         const {
             dtReserva,
-            cdMorador
+            hrReserva,
+            cdMorador,
         
         } = req.body;
         
         const reservaPiscina = await ReservaPiscinaService.create(
             {
                 dtReserva,
-                cdMorador
+                hrReserva,
+                cdMorador,
             }
         );
         return res.status(201).json(reservaPiscina);

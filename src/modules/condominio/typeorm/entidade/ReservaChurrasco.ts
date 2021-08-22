@@ -1,11 +1,11 @@
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
 
 
-@Entity({name:"tb_reserva_piscina", schema:"condominio",synchronize:false})
-class ReservaPiscina {
+@Entity({name:"tb_reserva_churrasco", schema:"condominio",synchronize:false})
+class ReservaChurrasco {
     @PrimaryGeneratedColumn('increment')
-    @PrimaryColumn({name:"id_reserva_piscina"})
-    idReservaPiscina: number;
+    @PrimaryColumn({name:"reserva_churrasco"})
+    idReservaChurrasco: number;
 
     @Column({name:'dt_reserva'})
     dtReserva: Date;
@@ -17,5 +17,5 @@ class ReservaPiscina {
     cdMorador: number; 
 }
 
-export default ReservaPiscina;
+export default ReservaChurrasco;
 

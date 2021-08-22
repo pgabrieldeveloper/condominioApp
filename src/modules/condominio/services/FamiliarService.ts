@@ -7,7 +7,6 @@ interface IFamiliar {
     idFamiliar?: number;
     dsNome?: string;
     dsCpf: string;
-    cdApartamento?: number;
     dsContato?: string;
     dsEmail?: string;
     cdMorador?: number;
@@ -25,9 +24,10 @@ class FamiliarService {
   public async create({
     dsNome,
     dsCpf,
-    cdApartamento,
+    cdMorador,
     dsContato,
     dsEmail
+    
     
   }: IFamiliar): Promise<Familiares | undefined> {
     const repositorio = getCustomRepository(FamiliaresRepositorio);
@@ -36,7 +36,7 @@ class FamiliarService {
     if(familiarExistes) {
             throw new AppError('Familiar Ja cadastrato', 401);
     }
-    const  familiares = repositorio.create({dsCpf,cdApartamento,dsNome,dsEmail,dsContato});
+    const  familiares = repositorio.create({dsCpf,cdMorador,dsNome,dsEmail,dsContato});
     await repositorio.save(familiares);
     return familiares;
   }

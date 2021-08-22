@@ -6,6 +6,7 @@ import ReservaPiscina from '../typeorm/entidade/ReservaPiscina';
 interface IReservaPiscina { 
     idReservaPiscina?: number;
     dtReserva: Date;
+    hrReserva?: string;
     cdMorador?: number;
 }
 
@@ -16,16 +17,23 @@ interface IRequest {
 class ReservaPiscinaService {
   public async create({
     dtReserva,
+    hrReserva,
     cdMorador
     
   }: IReservaPiscina): Promise<ReservaPiscina | undefined> {
     const repositorio = getCustomRepository(ReservaPiscinaRepositorio);
-    const reservaPiscinaExiste = await repositorio.reservaPiscinaCountTen(dtReserva);  
+    if(!hrReserva){
+      throw new AppError("Horario é obrigatorio para esta modalidade");
+    }
+    if(!dtReserva){
+      throw new AppError("Horario é obrigatorio para esta modalidade");
+    }
+    const reservaPiscinaExiste = await repositorio.reservaPiscinaDataHora(dtReserva, hrReserva);  
     if(reservaPiscinaExiste) {
         if(reservaPiscinaExiste.length > 10){
             throw new AppError('Horario Lotado de pessoas', 500);
         }
-        const reservaPiscina = repositorio.create({dtReserva, cdMorador});
+        const reservaPiscina = repositorio.create({dtReserva,hrReserva, cdMorador});
         await repositorio.save(reservaPiscina);
         return reservaPiscina;
 
@@ -38,7 +46,10 @@ class ReservaPiscinaService {
 
   public async getAllday({dtReserva}:IReservaPiscina): Promise<ReservaPiscina[] | undefined>{
     const repositorio = getCustomRepository(ReservaPiscinaRepositorio);
-    const reservaPiscinaDay = await repositorio.reservaPiscinaCountTen(dtReserva);
+    const reservaPiscinaDay = await repositorio.getAllDay(dtReserva);
+    if(!reservaPiscinaDay){
+      throw new AppError("nenhuma Reserva Encontrada para este dia", 404);
+    }
     return reservaPiscinaDay;
   }
 
